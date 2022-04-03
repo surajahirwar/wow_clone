@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+	<link rel="stylesheet" type="text/css" href="./styles/navbar.css">
+</head>
+ <body>
+    <div id="main_navbar"></div>
+    <div id="navbar">
+        <p>Home</p>
+        <p> / Activated Charcoal</p>
+    </div>
+    <div id="page_info">
+        <p id="big_name">Activated Charcoal</p>
+        <p>Known to deep cleanse the skin and effectively remove grime and impurities, activated charcoal is common charcoal exposed to heat, turning it into an black odorless powder. A popular ingredient and choice in skin care, activated charcoal is a great choice to remove skin impurity, reduce acne and control oiliness. Shop the charcoal range today!  </p>
+    </div>
+    <div id="append_html">
+   
+   </div>
+   <div id="main_footer"></div>
+</body>
+</html>
+<script type="text/javascript" src="./scripts/navbar.js"></script>
+<script src="https://kit.fontawesome.com/b4ce217570.js" crossorigin="anonymous"></script>
+<script type="module">
+
+import {navbar, footer} from "/components/index.js"
+	
+	 document.querySelector("#main_navbar").innerHTML = navbar();
+
+  let footer_div = document.querySelector("#main_footer");
+     footer_div.innerHTML = footer();
+  
+    
+ import append_html from "./components/append.js"
+ 
+     
+ document.querySelector("#append_html").innerHTML=append_html();
+
+ 
+ import {take,map,grid,detailed,filter} from "./scripts/main.js";
+  
+  
+// map function for strt page
+
+ let dataof = await take("charcol");
+
+ let parent=document.querySelector("#main");
+  
+ let sec_parent= document.querySelector("#detailed");
+  
+ map(dataof.charcol_datas,parent,sec_parent)
+
+   
+//   for grid view
+  
+ let img1=  document.querySelector("#creat_grid")
+ let img2=  document.querySelector("#creat_detailed");
+   
+ document.querySelector("#creat_grid").addEventListener("click",()=>{
+          grid(dataof.charcol_datas,parent,sec_parent,img1,img2)
+    })
+
+     
+//  for detailed view
+
+document.querySelector("#creat_detailed").addEventListener("click",()=>{
+    detailed(dataof.charcol_datas,parent,sec_parent,img1,img2)
+})
+ 
+
+// sort and filter 
+
+let selected=document.querySelector("#select_option").value;
+document.querySelector("#select_option").addEventListener("change",()=>{
+ let selected=document.querySelector("#select_option").value
+ filter(selected,dataof.charcol_datas,parent,sec_parent,img1,img2)
+})
+
+</script>

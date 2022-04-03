@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+	<link rel="stylesheet" type="text/css" href="./styles/navbar.css">
+</head>
+ <body>
+    <div id="main_navbar"></div>
+    <div id="navbar">
+        <p>Home</p>
+        <p> / Wellness</p>
+    </div>
+    <div id="page_info">
+        <p id="big_name">Wellness</p>
+        <p>Shop our premium range of natural wellness and hygiene products specially formulated to be gentle on your skin.  </p>
+    </div>
+    <div id="append_html">
+   
+   </div>
+   <div id="main_footer"></div>
+</body>
+</html>
+<script type="text/javascript" src="./scripts/navbar.js"></script>
+<script src="https://kit.fontawesome.com/b4ce217570.js" crossorigin="anonymous"></script>
+<script type="module">
+
+import {navbar, footer} from "/components/index.js"
+	
+	 document.querySelector("#main_navbar").innerHTML = navbar();
+
+  let footer_div = document.querySelector("#main_footer");
+     footer_div.innerHTML = footer();
+   
+  
+    
+    
+ import append_html from "./components/append.js"
+ 
+     
+ document.querySelector("#append_html").innerHTML=append_html();
+
+ 
+ import {take,map,grid,detailed,filter} from "./scripts/main.js";
+  
+  
+// map function for strt page
+
+ let dataof = await take("wellness")
+ 
+ let parent=document.querySelector("#main");
+  
+ let sec_parent= document.querySelector("#detailed")
+  
+ map(dataof.wellness_datas,parent,sec_parent)
+
+   
+//   for grid view
+  
+ let img1=  document.querySelector("#creat_grid")
+ let img2=  document.querySelector("#creat_detailed");
+   
+ document.querySelector("#creat_grid").addEventListener("click",()=>{
+          grid(dataof.wellness_datas,parent,sec_parent,img1,img2)
+    })
+
+     
+//  for detailed view
+
+document.querySelector("#creat_detailed").addEventListener("click",()=>{
+    detailed(dataof.wellness_datas,parent,sec_parent,img1,img2)
+})
+ 
+
+// sort and filter 
+
+let selected=document.querySelector("#select_option").value;
+document.querySelector("#select_option").addEventListener("change",()=>{
+ let selected=document.querySelector("#select_option").value
+ filter(selected,dataof.wellness_datas,parent,sec_parent,img1,img2)
+})
+
+</script>
